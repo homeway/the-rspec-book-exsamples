@@ -3,5 +3,22 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'codebreaker'
 
 game = Codebreaker::Game.new(STDOUT)
-game.start('1234')
+code = game.generate
+game.start(code)
+
+
+while true
+  input = gets
+  if input.length < 4
+    puts "答案是:#{code}"
+    puts '感谢您的参与！'
+    break
+  elsif game.guess(input) == '++++'
+    puts '恭喜！您答对了！'
+    break
+  else
+    puts '再试一试'
+  end
+end
+
 
